@@ -23,19 +23,20 @@
 
 ## 原型规则和示例
  - 所有的引用类型(数组、对象、函数)，都具有对象特性，即可自由扩展属性(null除外);  
-    ```
-    var obj = {}; obj.a = 100;  
-    var arr = []; arr.b = 100;
- 
-    function fn(){}
-    fn.a = 100;
-   ``` 
+ ```
+ var obj = {}; obj.a = 100;  
+ var arr = []; arr.b = 100;
+
+function fn(){}
+fn.a = 100;
+ ```
+
 - 所有的引用类型(数组、对象、函数)，都具有__proto__（隐式原型）特性，属性值是一个普通的对象;
-    ```    
+   ```
     console.log(obj.__proto__);
     console.log(arr.__proto__);
     console.log(fn.__proto__);
-    ```    
+   ```
  - 所有的函数，都具有prototype（显示原型）特性，属性值也是一个普通的对象;  
  - 所有的引用类型(数组、对象、函数)，都具有__proto__属性的值指向它得到构造函数的“prototype”的属性值;
     ```
@@ -67,11 +68,12 @@
     var item;
     for(item in f){
         if(f.hasOwnProperty(item)){
-            
-            
-        }
-    }
-    
+
+
+​            
+​        }
+​    }
+
 ### 原型链
     ```
     function Foo(name,age){
@@ -84,7 +86,7 @@
          f.printName = function(){
              console.log(this.name);
          }
-
+    
          f.printName();
          f.alertname();
          
@@ -102,7 +104,7 @@
 
     var arr;
     arr instanceof Array
-    
+
 ### 写一个原型链继承的例子
     ```
     function Animal(){
@@ -180,7 +182,7 @@ console.log(book2.c) // Hello;
 ```
 #### 普通函数和构造函数的区别
 
-所谓构造函数，是生成一个对象的模板，是生成对象的函数。一个构造函数，可以生成多个实例对象，每个实例对象都有相同的结构。
+**所谓构造函数，是生成一个对象的模板，是生成对象的函数。**一个构造函数，可以生成多个实例对象，每个实例对象都有相同的结构。
 
 1. 构造函数的函数名首字母一般都为大写
    普通函数 遵照小驼峰式命名法
@@ -200,7 +202,7 @@ console.log(book2.c) // Hello;
  - 范围：一段<script> 或者一个函数
  - 全局：变量定义，函数声明
  - 函数：变量定义、函数声明、this、argumens  
- 
+
  变量提升 
 
 #### 函数声明和函数表达式的区别
@@ -218,15 +220,35 @@ myFunc(function(){
 ```
 函数声明会在任何表达式被解析和求值之前先行被解析和求值。
 
-
 #### this
 
-this在执行时才能确认值，定义时无法确定。
 
-![image](http://upload-images.jianshu.io/upload_images/7567991-85e5718d36da6ae8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+[JavaScript 的 this 原理-[阮一峰](http://www.ruanyifeng.com/)](http://www.ruanyifeng.com/blog/2018/06/javascript-this.html)
+
+`this`指的是函数运行时所在的环境。在执行时才能确认值，定义时无法确定。
+
+```javascript
+var obj = {
+  foo: function () { console.log(this.bar) },
+  bar: 1
+};
+
+var foo = obj.foo;
+var bar = 2;
+
+obj.foo() // 1
+foo() // 2
+```
+
+对于`obj.foo()`来说，`foo`运行在`obj`环境，所以`this`指向`obj`；对于`foo()`来说，`foo`运行在全局环境，所以`this`指向全局环境。所以，两者的运行结果不一样。
+
+`this`的设计目的就是在函数体内部，指代函数当前的运行环境。
+
+箭头函数其实是没有 `this` 的，箭头函数中的 `this` 只取决包裹箭头函数的第一个普通函数的 `this`
 
  #### call apply bind
- 
+
  **call**
  ```
  function fn1(){
@@ -236,7 +258,7 @@ this在执行时才能确认值，定义时无法确定。
  fn1.call({x:100},'zhangsan');
  ```
  这里this就是{x:100}  
- 
+
  **bind**
  ```
  var fn2 = function(){
@@ -247,11 +269,11 @@ this在执行时才能确认值，定义时无法确定。
  ```
  应用bind后，this只能为bind绑定的对象。  
  此情况 不可应用函数声明
- 
+
  **apply**
- 
+
  只接受两个参数，第一个参数和call相同，后面的为一个数组。
- 
+
 
 #### 作用域
 * 没有块级作用域
@@ -400,9 +422,9 @@ console.log(300)
 ### 解题
 
 同步异步的区别
-    * 同步会阻塞代码的执行，而异步不会
-    * alert是同步，setTimeout是异步
-    
+​    * 同步会阻塞代码的执行，而异步不会
+​    * alert是同步，setTimeout是异步
+​    
 ---
 e.g. js是单线程的，但浏览器是多线程的， webworker（在服务器上）来实现js多线程
 
@@ -455,13 +477,20 @@ dt.getSeconds()     秒（0-59）
     })
     ```
 * some      判断元素是否有至少一个元素符合条件
+
      ```
-    var result = arr.some(function(item,index){
-        if(item < 5){
-            return true;
-        }
-    })
-    ```
+     
+     ```
+
+     var result = arr.some(function(item,index){
+         if(item < 5){
+             return true;
+         }
+     })
+
+     ```
+     
+     ```
 * sort      排序
     ```
     var arr = [1,4,2,3,9,20,5]
@@ -482,7 +511,7 @@ dt.getSeconds()     秒（0-59）
     var arr2 = arr.map(function(item,index){
         return '<b>' + item + '</b>'
     })
-    ```
+ ```
 
 * filter    过滤符合条件的数组
 
@@ -493,7 +522,7 @@ dt.getSeconds()     秒（0-59）
         }
         console.log(arr2)
     })
-    ```
+ ```
 #### 对象API
 
 for(..in..){}
@@ -735,3 +764,4 @@ function bindEvent(elem,type,selector,fn){
 
 
 ```
+
