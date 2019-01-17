@@ -1,22 +1,15 @@
 2019.01.07
 
 ## 变量类型
-<<<<<<< HEAD
 
 #### 原始类型
 
 - `boolean`
-
 - `null`
 - `undefined`
 - `number`
 - `string`
 - `symbol`
-=======
-#### 原始值
-
-`undefined`，`string`，`number`，`boolean`，`object`,`Symbol`(新增)
->>>>>>> refs/remotes/origin/master
 
 #### 值类型/引用类型
 
