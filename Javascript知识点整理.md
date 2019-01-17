@@ -1,6 +1,7 @@
 2019.01.07
 
 ## 变量类型
+<<<<<<< HEAD
 
 #### 原始类型
 
@@ -11,12 +12,24 @@
 - `number`
 - `string`
 - `symbol`
+=======
+#### 原始值
+
+`undefined`，`string`，`number`，`boolean`，`object`,`Symbol`(新增)
+>>>>>>> refs/remotes/origin/master
 
 #### 值类型/引用类型
 
 引用类型：对象，数组，函数。
 #### typeof 运算符（6种类型）
-只能区分值类型（undefined，string，number，boolean，object，function）
+只能区分值类型
+
+`undefined`，`string`，`number`，`boolean`，`object`，`function`，`Symbol`(新增)
+
+_TIPS:_
+
+`typeof null == object`
+
 #### 变量类型-强制类型转换
 * 字符串拼接
 * ==运算
