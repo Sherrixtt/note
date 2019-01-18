@@ -30,15 +30,23 @@ _TIPS:_
 * 逻辑运算
 
 
-## 构造函数
-#### 构造函数-拓展
+
+#### 构造函数
     var a = {} &nbsp;其实是var a = new Object();
     var a = [] &nbsp;其实是var a = new Array();
     var function Foo(){} 其实是 var Foo = new Function(){}
 #### instanceof  
     instanceof判断一个函数是否为一个变量的构造函数
 
+#### var let const区别
+
+- 函数提升优先于变量提升，函数提升会把整个函数挪到作用域顶部，变量提升只会把声明挪到作用域顶部
+- `var` 存在提升，我们能在声明之前使用。`let`、`const` 因为暂时性死区的原因，不能在声明前使用
+- `var` 在全局作用域下声明变量会导致变量挂载在 `window` 上，其他两者不会
+- `let` 和 `const` 作用基本一致，但是后者声明的变量不能再次赋值
+
 ## 原型规则和示例
+
  - 所有的引用类型(数组、对象、函数)，都具有对象特性，即可自由扩展属性(null除外);  
  ```
  var obj = {}; obj.a = 100;  
@@ -262,7 +270,9 @@ foo() // 2
 
 `this`的设计目的就是在函数体内部，指代函数当前的运行环境。
 
-箭头函数其实是没有 `this` 的，箭头函数中的 `this` 只取决包裹箭头函数的第一个普通函数的 `this`
+箭头函数其实是没有 `this` 的，箭头函数中的 `this` 只取决包裹箭头函数的第一个普通函数的 `this`。
+
+![img](https://user-gold-cdn.xitu.io/2018/11/15/16717eaf3383aae8?imageslim)
 
  #### call apply bind
 
@@ -904,4 +914,33 @@ var throttle = function(delay, action){
   } 
 } 
 ```
+
+1. If Type(x) is the same asType(y), then
+   1. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is Undefined, return **true**.
+   2. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is Null, return **true**.
+   3. If Type(x) is Number, then
+      1. If *x* is **NaN**, return **false**.
+      2. If *y* is **NaN**, return **false**.
+      3. If *x* is the same Number value as *y*, return **true**.
+      4. If *x* is **+0** and *y* is **−0**, return **true**.
+      5. If *x* is **−0** and *y* is **+0**, return **true**.
+      6. Return **false**.
+   4. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is String, then return **true** if *x* and *y* are exactly the same sequence of characters (same length and same characters in corresponding positions). Otherwise, return **false**.
+   5. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is Boolean, return **true** if *x* and *y* are both **true** or both **false**. Otherwise, return **false**.
+   6. Return **true** if *x* and *y* refer to the same object. Otherwise, return **false**.
+2. If *x* is **null** and *y* is **undefined**, return **true**.
+3. If *x* is **undefined** and *y* is **null**, return **true**.
+4. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is Number and [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*y*) is String,
+   return the result of the comparison *x* == [ToNumber](https://www.ecma-international.org/ecma-262/5.1/#sec-9.3)(*y*).
+5. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is String and [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*y*) is Number,
+   return the result of the comparison [ToNumber](https://www.ecma-international.org/ecma-262/5.1/#sec-9.3)(*x*) == *y*.
+6. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is Boolean, return the result of the comparison [ToNumber](https://www.ecma-international.org/ecma-262/5.1/#sec-9.3)(*x*) == *y*.
+7. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*y*) is Boolean, return the result of the comparison *x* == [ToNumber](https://www.ecma-international.org/ecma-262/5.1/#sec-9.3)(*y*).
+8. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is either String or Number and [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*y*) is Object,
+   return the result of the comparison *x* == [ToPrimitive](https://www.ecma-international.org/ecma-262/5.1/#sec-9.1)(*y*).
+9. If [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*x*) is Object and [Type](https://www.ecma-international.org/ecma-262/5.1/#sec-8)(*y*) is either String or Number,
+   return the result of the comparison [ToPrimitive](https://www.ecma-international.org/ecma-262/5.1/#sec-9.1)(*x*) == *y*.
+10. Return **false**.
+
+ 
 
