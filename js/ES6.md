@@ -49,3 +49,13 @@ p.constructor === Point.prototype.constructor // true
 ```
 
 一个类必须有`constructor`方法，如果没有显式定义，一个空的`constructor`方法会被默认添加。
+
+类必须使用`new`调用，否则会报错。这是它跟普通构造函数的一个主要区别，后者不用`new`也可以执行。
+
+类不存在变量提升（hoist），这一点与 ES5 完全不同。
+
+```javascript
+new Foo(); // ReferenceError
+class Foo {}
+```
+
