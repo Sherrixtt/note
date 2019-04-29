@@ -37,4 +37,91 @@
 
   
 
-* 
+
+### Vue.nextTick( [callback, context\] )]
+
+在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+
+> Vue 实现响应式并**不是数据发生变化之后 DOM 立即变化**，而是按一定的策略进行 DOM 的更新。
+
+
+
+也就是说，nextTick中的方法 会在数据更新到DOM之后执行，否则对DOM节点的操作可能会undefined.
+
+`$nextTick()` 返回一个 `Promise` 对象
+
+原因：
+
+> Vue 在更新 DOM 时是**异步**执行的。只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。
+
+因为 `$nextTick()` 返回一个 `Promise` 对象，所以你可以使用新的 [ES2016 async/await](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function) 语法完成相同的事情：
+
+```
+methods: {
+  updateMessage: async function () {
+    this.message = '已更新'
+    console.log(this.$el.textContent) // => '未更新'
+    await this.$nextTick()
+    console.log(this.$el.textContent) // => '已更新'
+  }
+}
+```
+
+### 兄弟组件数据传递
+
+1. vuex
+
+2. `$parent.$children`
+
+3. EventBus（全局的事件总线）
+
+   参考：[vue篇之事件总线（EventBus）](<https://www.jianshu.com/p/4fa3bf211785>)
+
+   在Vue中可以使用 `EventBus` 来作为沟通桥梁的概念，就像是所有组件共用相同的事件中心，可以向该中心注册发送事件或接收事件，所以组件都可以上下平行地通知其他组件
+
+```javascript
+// event-bus.js
+import Vue from 'vue'
+export const EventBus = new Vue()
+
+// main.js
+Vue.prototype.$EventBus = new Vue()
+
+//发送事件
+<script> import { EventBus } from "../event-bus.js";
+    export default {
+        name: "DecreaseCount",
+        data() {
+            return {
+                num: 1,
+                deg:180
+            };
+        },
+        methods: {
+            decrease() {
+                EventBus.$emit("decreased", {
+                    num:this.num,
+                    deg:this.deg
+                });
+            }
+        }
+    }; 
+</script>
+
+//接收事件
+ mounted() {
+   
+     EventBus.$on("decreased", ({num,deg}) => {
+         this.fontCount -= num
+         this.$nextTick(()=>{
+             this.backCount -= num
+             this.degValue -= deg;
+         })
+     });
+ }
+```
+
+​	
+
+
+
