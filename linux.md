@@ -27,6 +27,7 @@
   cd ~ 家目录
   cd - / cd  上一次目录
 * pwd   (print working directory)
++++
   查询所在目录位置 
 * rmdir [目录名]    (remove empty directories) 
   删除空目录
