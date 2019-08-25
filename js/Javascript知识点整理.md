@@ -11,6 +11,27 @@
 - `string`
 - `symbol`
 
+##### String
+String的最大长度是2^53-1 同时也是最大安全数
+
+##### Number 
+
+* js中是有+0 和 -0的，区分+0和-0的方法是1/x是Infinity或是-Infinity
+* 非整数的Number无法用==或===来比较。
+`console.log(0.1+ 0.2 === 0.3) // false`
+因为浮点运算精度问题导致两边并不完全相等，正确的比较方法是`Math.abs(0.1 + 0.2 - 0.3) <= Number.EPSLION`检测结果是否小于最小精度。
+
+##### Object
+
+JS中的几个基本类型都在对象中有一个“亲戚”：
+* String
+* Number
+* Boolean
+* Symbol
+3 和 new Number(3)是不同的，一个是Number类型，一个是对象类型。
+Number、String和Boolean，三个构造器是两用的，当跟 new 搭配时，它们产生对象，当直接调用时，它们表示强制类型转换。
+
+
 #### 值类型/引用类型
 
 引用类型：对象，数组，函数。
