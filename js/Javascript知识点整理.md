@@ -28,8 +28,13 @@ JS中的几个基本类型都在对象中有一个“亲戚”：
 * Number
 * Boolean
 * Symbol
-3 和 new Number(3)是不同的，一个是Number类型，一个是对象类型。
-Number、String和Boolean，三个构造器是两用的，当跟 new 搭配时，它们产生对象，当直接调用时，它们表示强制类型转换。
+3 和 `new Number(3)`是不同的，一个是Number类型，一个是对象类型。
+`Number`、`String`和`Boolean`，三个构造器是两用的，当跟 new 搭配时，它们产生对象，当直接调用时，它们表示强制类型转换。
+
+JS在语言设计上就模糊了对象和基本类型之间的关系，所以在基本类型上可以调用对象的方法。
+```
+    console.log("abc".charAt(0)); //a
+```
 
 
 #### 值类型/引用类型
