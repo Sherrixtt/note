@@ -22,4 +22,7 @@
 默认情况下，`git push` 命令并不会传送标签到远程仓库服务器上
 * `git push origin [tagname]` 上传一个tag至远程仓库
 * `git push origin --tags` 把所有标签上传到远程仓库 
-#### 6. 
+#### 6. 常用分支
+  * feature 新功能
+  * hotfix- 热修复:生成环境验证缺陷必须马上修复
+  * release
