@@ -5,8 +5,8 @@
     git log --pretty=oneline --author=tangxuewei
     –pretty   可以指定使用不同于默认格式的方式展示提交历史
 #### 3.Commit 
-`git commit --amend` 撤消操作
-重新提交,覆盖之前提交信息
+  `git commit --amend` 撤消操作
+    重新提交,覆盖之前提交信息
 > ##### Vim操作
 > i 切换到输入模式
 > : 切换到底线命令模式 (:wq保存退出  :q退出)
