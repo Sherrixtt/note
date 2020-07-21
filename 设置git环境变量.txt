@@ -1,0 +1,1 @@
+SETX /U 231985 PATH=%PATH%;"D:\Program Files\Git\bin"
